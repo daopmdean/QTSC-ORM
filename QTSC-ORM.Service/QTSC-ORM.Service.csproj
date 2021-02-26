@@ -9,4 +9,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Implementations\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QTSC-ORM.Data\QTSC-ORM.Data.csproj" />
+  </ItemGroup>
 </Project>
