@@ -16,7 +16,7 @@ namespace QTSC_ORM.Extensions
         {
             services.AddDbContext<DataContext>(
                 options => options.UseSqlite(config.GetConnectionString("DefaultConnection"),
-                x => x.MigrationsAssembly("QTSC-ORM")));
+                x => x.MigrationsAssembly("QTSC-ORM.Data")));
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
 
