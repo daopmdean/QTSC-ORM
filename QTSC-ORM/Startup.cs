@@ -28,6 +28,7 @@ namespace QTSC_ORM
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationService(Configuration);
+            services.AddIdentityServices(Configuration);
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
