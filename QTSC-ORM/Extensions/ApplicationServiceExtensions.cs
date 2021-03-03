@@ -22,6 +22,7 @@ namespace QTSC_ORM.Extensions
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddScoped<IWeatherForcastService, WeatherForecastService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
