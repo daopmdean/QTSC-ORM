@@ -1,0 +1,74 @@
+[
+  {
+    "userName": "Garrett",
+    "fullName": "Cornelia Hardy",
+    "gender": "female",
+    "phone": "(897) 550-2295",
+    "address": "276 Elliott Place, Jessie, New York, 3440",
+    "dateOfBirth": "1997-03-11T05:17:52 -07:00"
+  },
+  {
+    "userName": "Ewing",
+    "fullName": "Dillard William",
+    "gender": "male",
+    "phone": "(833) 553-2468",
+    "address": "706 Madison Place, Homestead, North Dakota, 5358",
+    "dateOfBirth": "1980-10-02T02:21:18 -07:00"
+  },
+  {
+    "userName": "Carlson",
+    "fullName": "Maritza Mcclain",
+    "gender": "female",
+    "phone": "(803) 459-2788",
+    "address": "588 Llama Court, Hackneyville, Alabama, 8139",
+    "dateOfBirth": "1989-10-15T12:21:35 -07:00"
+  },
+  {
+    "userName": "Bender",
+    "fullName": "Sally Pollard",
+    "gender": "female",
+    "phone": "(926) 454-2926",
+    "address": "940 Sackman Street, Tetherow, North Carolina, 2761",
+    "dateOfBirth": "1984-07-03T03:35:17 -07:00"
+  },
+  {
+    "userName": "Noelle",
+    "fullName": "Little Hinton",
+    "gender": "male",
+    "phone": "(816) 579-3199",
+    "address": "190 Portal Street, Coventry, Puerto Rico, 1389",
+    "dateOfBirth": "1990-08-21T12:00:16 -07:00"
+  },
+  {
+    "userName": "Mcdaniel",
+    "fullName": "Courtney Hyde",
+    "gender": "female",
+    "phone": "(987) 476-3665",
+    "address": "594 Norwood Avenue, Norwood, New Mexico, 9581",
+    "dateOfBirth": "1995-06-11T08:53:09 -07:00"
+  },
+  {
+    "userName": "Valdez",
+    "fullName": "Johns Powell",
+    "gender": "male",
+    "phone": "(917) 475-2361",
+    "address": "163 Suydam Street, Sanford, New Hampshire, 3571",
+    "dateOfBirth": "1980-09-15T02:55:09 -07:00"
+  },
+  {
+    "userName": "Simpson",
+    "fullName": "Mcknight Ewing",
+    "gender": "male",
+    "phone": "(827) 496-2357",
+    "address": "812 Nixon Court, Goodville, Northern Mariana Islands, 2224",
+    "dateOfBirth": "1989-06-03T05:56:12 -07:00"
+  },
+  {
+    "userName": "Davis",
+    "fullName": "Travis Dunlap",
+    "gender": "male",
+    "phone": "(999) 523-3181",
+    "address": "781 Newport Street, Chesterfield, Wisconsin, 8705",
+    "dateOfBirth": "1984-04-03T04:56:13 -07:00"
+  }
+]

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Seedings\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QTSC-ORM.Data\QTSC-ORM.Data.csproj">
@@ -25,5 +26,14 @@
     <ProjectReference Include="..\QTSC-ORM.Service\QTSC-ORM.Service.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="qtsc_orm.db-shm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Seedings\generated_users.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Seedings\generated_users.json" />
   </ItemGroup>
 </Project>

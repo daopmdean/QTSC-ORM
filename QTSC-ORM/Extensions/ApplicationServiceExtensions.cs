@@ -6,6 +6,7 @@ using QTSC_ORM.Data;
 using QTSC_ORM.Data.Repositories;
 using QTSC_ORM.Service.Implementations;
 using QTSC_ORM.Service.Interfaces;
+using QTSC_ORM.Service.Utils;
 
 namespace QTSC_ORM.Extensions
 {
@@ -16,11 +17,15 @@ namespace QTSC_ORM.Extensions
         {
             services.AddDbContext<DataContext>(
                 options => options.UseSqlite(config.GetConnectionString("DefaultConnection"),
-                x => x.MigrationsAssembly("QTSC-ORM.Data")));
+                x => x.MigrationsAssembly("QTSC-ORM")));
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
 
             services.AddScoped<IWeatherForcastService, WeatherForecastService>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

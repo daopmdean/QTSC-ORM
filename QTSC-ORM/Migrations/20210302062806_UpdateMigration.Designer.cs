@@ -9,8 +9,8 @@ using QTSC_ORM.Data;
 namespace QTSC_ORM.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210301063407_NewMigration")]
-    partial class NewMigration
+    [Migration("20210302062806_UpdateMigration")]
+    partial class UpdateMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,21 +81,6 @@ namespace QTSC_ORM.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -199,9 +184,6 @@ namespace QTSC_ORM.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
@@ -221,9 +203,32 @@ namespace QTSC_ORM.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.AppUserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AppRoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("AppRoleId");
+
+                    b.HasIndex("AppUserId");
+
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Building", b =>
@@ -489,8 +494,25 @@ namespace QTSC_ORM.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
+                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.AppUserRole", b =>
+                {
+                    b.HasOne("QTSC_ORM.Data.Entities.AppRole", "AppRole")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("AppRoleId");
+
+                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", "AppUser")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("QTSC_ORM.Data.Entities.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -502,24 +524,10 @@ namespace QTSC_ORM.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Navigation("AppRole");
 
-            modelBuilder.Entity("QTSC_ORM.Data.Entities.AppUser", b =>
-                {
-                    b.HasOne("QTSC_ORM.Data.Entities.AppRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Contract", b =>
@@ -581,6 +589,16 @@ namespace QTSC_ORM.Migrations
                         .HasForeignKey("FloorId");
 
                     b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Building", b =>
