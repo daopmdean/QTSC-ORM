@@ -6,7 +6,6 @@ namespace QTSC_ORM.Data.Entities
     public class Customer
     {
         public int Id { get; set; }
-        public int No { get; set; }
         public string TaxCode { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -18,9 +17,9 @@ namespace QTSC_ORM.Data.Entities
         public string Email { get; set; }
         public string WebSite { get; set; }
         public string BusinessType { get; set; }
-        public string RegisterdCapital { get; set; }
-        public string InvestedCapital { get; set; }
-        public string CharterCapital { get; set; }
+        public double RegisterdCapital { get; set; }
+        public double InvestedCapital { get; set; }
+        public double CharterCapital { get; set; }
         public int OwnerId { get; set; }
         public Owner Owner { get; set; }
         public ICollection<Deputy> Deputies { get; set; }

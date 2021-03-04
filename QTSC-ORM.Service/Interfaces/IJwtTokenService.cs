@@ -6,6 +6,6 @@ namespace QTSC_ORM.Service.Interfaces
 {
     public interface IJwtTokenService
     {
-        Task<string> CreateToken(AppUser user);
+        Task<string> CreateTokenAsync(AppUser user);
     }
 }

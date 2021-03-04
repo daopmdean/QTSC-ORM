@@ -24,7 +24,7 @@ namespace QTSC_ORM.Service.Implementations
             _userManager = userManager;
         }
 
-        public async Task<string> CreateToken(AppUser user)
+        public async Task<string> CreateTokenAsync(AppUser user)
         {
             var claims = new List<Claim>
             {
