@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Repositories.Interfaces;
 
 namespace QTSC_ORM.Data.Repositories
 {

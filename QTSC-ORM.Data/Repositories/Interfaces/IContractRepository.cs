@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using QTSC_ORM.Data.Entities;
 using QTSC_ORM.Data.Pagings;
 
-namespace QTSC_ORM.Data.Repositories
+namespace QTSC_ORM.Data.Repositories.Interfaces
 {
     public interface IContractRepository
     {

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QTSC_ORM.Data;
 using QTSC_ORM.Data.Repositories;
+using QTSC_ORM.Data.Repositories.Interfaces;
 using QTSC_ORM.Service.Implementations;
 using QTSC_ORM.Service.Interfaces;
 using QTSC_ORM.Service.Utils;
@@ -24,6 +25,7 @@ namespace QTSC_ORM.Extensions
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
+
 
             services.AddScoped<IWeatherForcastService, WeatherForecastService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();

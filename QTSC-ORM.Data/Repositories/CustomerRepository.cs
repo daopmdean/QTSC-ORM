@@ -5,6 +5,7 @@ using AutoMapper.QueryableExtensions;
 using QTSC_ORM.Data.Entities;
 using QTSC_ORM.Data.Models;
 using QTSC_ORM.Data.Pagings;
+using QTSC_ORM.Data.Repositories.Interfaces;
 
 namespace QTSC_ORM.Data.Repositories
 {

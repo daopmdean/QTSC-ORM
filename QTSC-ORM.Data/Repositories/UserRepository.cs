@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Repositories.Interfaces;
 
 namespace QTSC_ORM.Data.Repositories
 {
