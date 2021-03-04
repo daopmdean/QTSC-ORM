@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Pagings;
 
 namespace QTSC_ORM.Data.Repositories.Interfaces
 {
@@ -9,6 +10,8 @@ namespace QTSC_ORM.Data.Repositories.Interfaces
         void UpdateUser(AppUser appUser);
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserByUsernameAsync(string username);
+        Task<PagedList<AppUser>> GetUsersByFullNameAsync(string fullName,
+            PaginationParams pagingParams);
         Task<bool> SaveAllAsync();
     }
 }

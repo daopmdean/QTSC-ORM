@@ -10,7 +10,7 @@ namespace QTSC_ORM.Service.Utils
         public AutoMapperProfiles()
         {
             CreateMap<RegisterInfo, AppUser>();
-            CreateMap<RegisterInfo, AppUser>();
+            CreateMap<UserUpdate, AppUser>();
 
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Pagings;
 using QTSC_ORM.Data.Repositories.Interfaces;
 
 namespace QTSC_ORM.Data.Repositories
@@ -26,9 +28,20 @@ namespace QTSC_ORM.Data.Repositories
                 .SingleOrDefaultAsync(user => user.UserName == username.ToLower());
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<PagedList<AppUser>> GetUsersByFullNameAsync(string fullName,
+            PaginationParams pagingParams)
         {
-            throw new NotImplementedException();
+            var users = _context.Users
+                .OrderBy(u => u.FullName)
+                .Where(user => user.FullName.Contains(fullName));
+
+            return await PagedList<AppUser>
+                .CreateAsync(users, pagingParams.PageNumber, pagingParams.PageSize);
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void UpdateUser(AppUser appUser)
