@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using QTSC_ORM.Data.Repositories;
+﻿using System.Collections.Generic;
+using QTSC_ORM.Data.Repositories.Interfaces;
 using QTSC_ORM.Service.Interfaces;
 
 namespace QTSC_ORM.Service.Implementations
@@ -8,6 +7,7 @@ namespace QTSC_ORM.Service.Implementations
     public class WeatherForecastService : IWeatherForcastService
     {
         private readonly IWeatherForecastRepository _weatherForecastRepo;
+
         public WeatherForecastService(IWeatherForecastRepository weatherForecastRepository)
         {
             _weatherForecastRepo = weatherForecastRepository;

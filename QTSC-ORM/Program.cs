@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QTSC_ORM.Data;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Repositories.Interfaces;
 using QTSC_ORM.Seedings;
 
 namespace QTSC_ORM
@@ -28,8 +29,16 @@ namespace QTSC_ORM
                 var context = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+                var customerRepository = services.GetRequiredService<ICustomerRepository>();
                 await context.Database.MigrateAsync();
                 await SeedingData.SeedUsers(userManager, roleManager);
+                await SeedingData.SeedCustomers(context, customerRepository);
+                await SeedingData.SeedOwners(context);
+                await SeedingData.SeedDeputies(context);
+                await SeedingData.SeedBuildings(context);
+                await SeedingData.SeedFloors(context);
+                await SeedingData.SeedRooms(context);
+                await SeedingData.SeedContracts(context);
             }
             catch (Exception ex)
             {

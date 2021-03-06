@@ -38,6 +38,10 @@ namespace QTSC_ORM.Data
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
 
+            builder.Entity<Customer>()
+                .HasOne(o => o.Owner)
+                .WithOne(x => x.Customer)
+                .HasForeignKey<Owner>(o => o.CustomerId);
         }
     }
 }

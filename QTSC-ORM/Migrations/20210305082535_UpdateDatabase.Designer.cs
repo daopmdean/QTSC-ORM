@@ -9,8 +9,8 @@ using QTSC_ORM.Data;
 namespace QTSC_ORM.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210302062806_UpdateMigration")]
-    partial class UpdateMigration
+    [Migration("20210305082535_UpdateDatabase")]
+    partial class UpdateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,17 +214,7 @@ namespace QTSC_ORM.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AppRoleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("AppRoleId");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("RoleId");
 
@@ -314,8 +304,8 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("BusinessType")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CharterCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("CharterCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("CompanyType")
                         .HasColumnType("TEXT");
@@ -326,20 +316,14 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InvestedCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("InvestedCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("No")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("RegisterdCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("RegisterdCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("ShortName")
                         .HasColumnType("TEXT");
@@ -357,8 +341,6 @@ namespace QTSC_ORM.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Customers");
                 });
@@ -431,6 +413,9 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
@@ -441,6 +426,9 @@ namespace QTSC_ORM.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("Owners");
                 });
@@ -507,20 +495,12 @@ namespace QTSC_ORM.Migrations
                 {
                     b.HasOne("QTSC_ORM.Data.Entities.AppRole", "AppRole")
                         .WithMany("UserRoles")
-                        .HasForeignKey("AppRoleId");
-
-                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", "AppUser")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("QTSC_ORM.Data.Entities.AppRole", null)
-                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", null)
-                        .WithMany()
+                    b.HasOne("QTSC_ORM.Data.Entities.AppUser", "AppUser")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -549,17 +529,6 @@ namespace QTSC_ORM.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("QTSC_ORM.Data.Entities.Customer", b =>
-                {
-                    b.HasOne("QTSC_ORM.Data.Entities.Owner", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Deputy", b =>
                 {
                     b.HasOne("QTSC_ORM.Data.Entities.Customer", "Customer")
@@ -580,6 +549,17 @@ namespace QTSC_ORM.Migrations
                         .IsRequired();
 
                     b.Navigation("Building");
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.Owner", b =>
+                {
+                    b.HasOne("QTSC_ORM.Data.Entities.Customer", "Customer")
+                        .WithOne("Owner")
+                        .HasForeignKey("QTSC_ORM.Data.Entities.Owner", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Room", b =>
@@ -609,6 +589,8 @@ namespace QTSC_ORM.Migrations
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Customer", b =>
                 {
                     b.Navigation("Deputies");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Floor", b =>

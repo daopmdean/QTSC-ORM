@@ -6,6 +6,7 @@ namespace QTSC_ORM.Data.Entities
         public int Id { get; set; }
         public int No { get; set; }
         public double Square { get; set; }
+        public int FloorId { get; set; }
         public Floor Floor { get; set; }
     }
 }

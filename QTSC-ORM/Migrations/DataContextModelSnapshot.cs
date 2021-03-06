@@ -302,8 +302,8 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("BusinessType")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CharterCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("CharterCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("CompanyType")
                         .HasColumnType("TEXT");
@@ -314,20 +314,14 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InvestedCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("InvestedCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("No")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("RegisterdCapital")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("RegisterdCapital")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("ShortName")
                         .HasColumnType("TEXT");
@@ -345,8 +339,6 @@ namespace QTSC_ORM.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Customers");
                 });
@@ -419,6 +411,9 @@ namespace QTSC_ORM.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
@@ -429,6 +424,9 @@ namespace QTSC_ORM.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("Owners");
                 });
@@ -529,17 +527,6 @@ namespace QTSC_ORM.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("QTSC_ORM.Data.Entities.Customer", b =>
-                {
-                    b.HasOne("QTSC_ORM.Data.Entities.Owner", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Deputy", b =>
                 {
                     b.HasOne("QTSC_ORM.Data.Entities.Customer", "Customer")
@@ -560,6 +547,17 @@ namespace QTSC_ORM.Migrations
                         .IsRequired();
 
                     b.Navigation("Building");
+                });
+
+            modelBuilder.Entity("QTSC_ORM.Data.Entities.Owner", b =>
+                {
+                    b.HasOne("QTSC_ORM.Data.Entities.Customer", "Customer")
+                        .WithOne("Owner")
+                        .HasForeignKey("QTSC_ORM.Data.Entities.Owner", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Room", b =>
@@ -589,6 +587,8 @@ namespace QTSC_ORM.Migrations
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Customer", b =>
                 {
                     b.Navigation("Deputies");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("QTSC_ORM.Data.Entities.Floor", b =>

@@ -20,7 +20,6 @@ namespace QTSC_ORM.Data.Entities
         public double RegisterdCapital { get; set; }
         public double InvestedCapital { get; set; }
         public double CharterCapital { get; set; }
-        public int OwnerId { get; set; }
         public Owner Owner { get; set; }
         public ICollection<Deputy> Deputies { get; set; }
     }
