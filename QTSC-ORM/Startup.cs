@@ -63,6 +63,9 @@ namespace QTSC_ORM
             app.UseAuthorization();
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
