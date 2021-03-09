@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using QTSC_ORM.Data.Entities;
 using QTSC_ORM.Data.Models;
 using QTSC_ORM.Data.Pagings;
 using QTSC_ORM.Data.Repositories.Interfaces;
@@ -25,6 +26,12 @@ namespace QTSC_ORM.Controllers
         {
 
             return await _customerRepository.GetCustomers(pagingParams);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        {
+            return await _customerRepository.GetCustomer(id);
         }
     }
 }
