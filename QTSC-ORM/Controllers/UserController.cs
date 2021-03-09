@@ -51,7 +51,7 @@ namespace QTSC_ORM.Controllers
             return await _userRepository.GetUsersByFullNameAsync(fullName, pagingParams);
         }
 
-        [HttpGet]
+        [HttpGet("{username}")]
         public async Task<ActionResult<UserInfo>> GetUser(string username)
         {
             var appUser = await _userRepository.GetUserByUsernameAsync(username);

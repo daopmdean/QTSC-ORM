@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -37,7 +38,9 @@ namespace QTSC_ORM.Data.Repositories
 
         public async Task<PagedList<CustomerReturn>> GetCustomers(PaginationParams pagingParams)
         {
-            var query = _context.Customers.AsQueryable();
+            var query = _context.Customers
+                .OrderBy(c => c.Name)
+                .AsQueryable();
             var customers = query.ProjectTo<CustomerReturn>(_mapper.ConfigurationProvider);
 
             return await PagedList<CustomerReturn>
