@@ -16,6 +16,9 @@ namespace QTSC_ORM.Service.Utils
             CreateMap<Customer, CustomerReturn>();
             CreateMap<CustomerUpdate, Customer>();
             CreateMap<CustomerCreate, Customer>();
+
+            CreateMap<Contract, ContractReturn>();
+            CreateMap<ContractUpdate, Contract>();
         }
     }
 }
