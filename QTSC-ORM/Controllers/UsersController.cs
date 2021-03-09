@@ -13,21 +13,21 @@ namespace QTSC_ORM.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateUser(UserUpdate userUpdate)
+        [HttpPut("{username}")]
+        public async Task<ActionResult> UpdateUser(string username,
+            UserUpdate userUpdate)
         {
-            var username = User.GetUserName();
             var user = await _userRepository.GetUserByUsernameAsync(username);
 
             _mapper.Map(userUpdate, user);

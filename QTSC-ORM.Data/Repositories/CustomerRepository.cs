@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using QTSC_ORM.Data.Entities;
 using QTSC_ORM.Data.Models;
 using QTSC_ORM.Data.Pagings;
@@ -31,16 +32,23 @@ namespace QTSC_ORM.Data.Repositories
             _context.Customers.Remove(customer);
         }
 
+        public void UpdateCustomer(Customer customer)
+        {
+            _context.Entry(customer).State = EntityState.Modified;
+        }
+
         public async Task<Customer> GetCustomer(int id)
         {
             return await _context.Customers.FindAsync(id);
         }
 
-        public async Task<PagedList<CustomerReturn>> GetCustomers(PaginationParams pagingParams)
+        public async Task<PagedList<CustomerReturn>> GetCustomers(string name,
+            PaginationParams pagingParams)
         {
             var query = _context.Customers
                 .OrderBy(c => c.Name)
-                .AsQueryable();
+                .Where(c => c.Name.Contains(name));
+
             var customers = query.ProjectTo<CustomerReturn>(_mapper.ConfigurationProvider);
 
             return await PagedList<CustomerReturn>
@@ -51,5 +59,7 @@ namespace QTSC_ORM.Data.Repositories
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+
     }
 }

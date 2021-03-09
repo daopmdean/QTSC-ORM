@@ -10,8 +10,9 @@ namespace QTSC_ORM.Data.Repositories.Interfaces
     {
         void AddCustomer(Customer customer);
         void DeleteCustomer(Customer customer);
+        void UpdateCustomer(Customer customer);
         Task<Customer> GetCustomer(int id);
-        Task<PagedList<CustomerReturn>> GetCustomers(PaginationParams pagingParams);
+        Task<PagedList<CustomerReturn>> GetCustomers(string name, PaginationParams pagingParams);
         Task<bool> SaveAllAsync();
     }
 }

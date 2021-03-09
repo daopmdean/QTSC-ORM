@@ -12,7 +12,10 @@ namespace QTSC_ORM.Service.Utils
             CreateMap<RegisterInfo, AppUser>();
             CreateMap<UserUpdate, AppUser>();
             CreateMap<AppUser, UserInfo>();
+
             CreateMap<Customer, CustomerReturn>();
+            CreateMap<CustomerUpdate, Customer>();
+            CreateMap<CustomerCreate, Customer>();
         }
     }
 }

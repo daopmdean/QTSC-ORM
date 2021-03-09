@@ -27,12 +27,12 @@ namespace QTSC_ORM.Extensions
                     // connection string, or development connection string from env var.
                     if (env == "Development")
                     {
-                        // Use connection string from file.
                         connStr = config.GetConnectionString("DefaultConnection");
                     }
                     else
                     {
                         // Use connection string provided at runtime by Heroku.
+                        //var connUrl = "postgres://usfshlhxyljdpk:4da4558be0ceda53adb801513842b8db19a1491c1bcdcfe25109f1ff0e416bde@ec2-3-222-11-129.compute-1.amazonaws.com:5432/dc81i4kf51v4gt";
                         var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
                         // Parse connection URL to connection string for Npgsql
