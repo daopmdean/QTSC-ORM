@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using QTSC_ORM.Data.Entities;
+using QTSC_ORM.Data.Models;
 using QTSC_ORM.Data.Pagings;
 using QTSC_ORM.Data.Repositories.Interfaces;
 
@@ -11,10 +14,12 @@ namespace QTSC_ORM.Data.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public UserRepository(DataContext context)
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -28,14 +33,16 @@ namespace QTSC_ORM.Data.Repositories
                 .SingleOrDefaultAsync(user => user.UserName == username.ToLower());
         }
 
-        public async Task<PagedList<AppUser>> GetUsersByFullNameAsync(string fullName,
+        public async Task<PagedList<UserInfo>> GetUsersByFullNameAsync(string fullName,
             PaginationParams pagingParams)
         {
-            var users = _context.Users
+            var query = _context.Users
                 .OrderBy(u => u.FullName)
                 .Where(user => user.FullName.Contains(fullName));
 
-            return await PagedList<AppUser>
+            var users = query.ProjectTo<UserInfo>(_mapper.ConfigurationProvider);
+
+            return await PagedList<UserInfo>
                 .CreateAsync(users, pagingParams.PageNumber, pagingParams.PageSize);
         }
 
