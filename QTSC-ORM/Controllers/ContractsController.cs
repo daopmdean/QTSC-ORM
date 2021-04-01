@@ -43,7 +43,7 @@ namespace QTSC_ORM.Controllers
         }
 
         [HttpPut("{contractId}")]
-        public async Task<ActionResult> UpdateCustomer(int contractId,
+        public async Task<ActionResult> UpdateContract(int contractId,
             ContractUpdate contractUpdate)
         {
             var contract = await _contractRepository.GetContractById(contractId);
@@ -58,7 +58,7 @@ namespace QTSC_ORM.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Contract>> AddCustomer(ContractCreate contractCreate)
+        public async Task<ActionResult<Contract>> AddContract(ContractCreate contractCreate)
         {
             var contract = _mapper.Map<Contract>(contractCreate);
             _contractRepository.AddContract(contract);

@@ -65,6 +65,7 @@ namespace QTSC_ORM.Extensions
             services.AddScoped<IWeatherForcastService, WeatherForecastService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IContractService, ContractService>();
 
             return services;
         }
