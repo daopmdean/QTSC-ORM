@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using QTSC_ORM.Data.Entities;
 using QTSC_ORM.Data.Models;
 using QTSC_ORM.Data.Pagings;
+using QTSC_ORM.Data.Repositories.Interfaces;
 using QTSC_ORM.Service.Interfaces;
 
 namespace QTSC_ORM.Service.Implementations
 {
     public class ContractService : IContractService
     {
-        public ContractService()
+        private readonly IContractRepository _contractRepository;
+
+        public ContractService(IContractRepository contractRepository)
         {
+            _contractRepository = contractRepository;
         }
 
         public Contract GetContractByContractNo(int contractNo)
@@ -23,9 +28,9 @@ namespace QTSC_ORM.Service.Implementations
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ContractReturn> GetContracts(PaginationParams @params)
+        public async Task<IEnumerable<ContractReturn>> GetContracts(PaginationParams @params)
         {
-            throw new NotImplementedException();
+            return await _contractRepository.GetContracts(@params);
         }
     }
 }
